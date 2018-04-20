@@ -40,16 +40,11 @@
 #include "KoulesControlSpace.h"
 #include "KoulesStatePropagator.h"
 #include "KoulesDirectedControlSampler.h"
-#include "KoulesDecomposition.h"
 #include <ompl/base/spaces/RealVectorStateSpace.h>
 #include <ompl/control/planners/rrt/RRT.h>
 #include <ompl/control/planners/kpiece/KPIECE1.h>
 #include <ompl/control/planners/est/EST.h>
 #include <ompl/control/planners/pdst/PDST.h>
-#include <ompl/control/planners/sst/SST.h>
-#include <ompl/control/planners/syclop/SyclopRRT.h>
-#include <ompl/control/planners/syclop/SyclopEST.h>
-
 
 namespace ob = ompl::base;
 namespace oc = ompl::control;
@@ -158,22 +153,13 @@ ob::PlannerPtr KoulesSetup::getConfiguredPlannerInstance(const std::string& plan
     }
     if (plannerName == "est")
         return std::make_shared<oc::EST>(si_);
-    if (plannerName == "kpiece")
+    else if (plannerName == "kpiece")
         return std::make_shared<oc::KPIECE1>(si_);
-    if (plannerName == "sst")
+    else
     {
-        auto sstplanner(std::make_shared<oc::SST>(si_));
-        sstplanner->setSelectionRadius(0.05);
-        sstplanner->setPruningRadius(0.001);
-        return sstplanner;
+        auto pdstplanner(std::make_shared<oc::PDST>(si_));
+        pdstplanner->setProjectionEvaluator(
+            si_->getStateSpace()->getProjection("PDSTProjection"));
+        return pdstplanner;
     }
-    if (plannerName == "sycloprrt")
-        return std::make_shared<oc::SyclopRRT>(si_, std::make_shared<KoulesDecomposition>(getStateSpace()));
-    if (plannerName == "syclopest")
-        return std::make_shared<oc::SyclopEST>(si_, std::make_shared<KoulesDecomposition>(getStateSpace()));
-
-    auto pdstplanner(std::make_shared<oc::PDST>(si_));
-    pdstplanner->setProjectionEvaluator(
-        si_->getStateSpace()->getProjection("PDSTProjection"));
-    return pdstplanner;
 }

@@ -71,8 +71,12 @@ namespace ompl
             /** \brief Construct a solution that consists of a \e path and its attributes (whether it is \e approximate
              * and the \e difference to the desired goal) */
             PlannerSolution(const PathPtr &path)
-              : path_(path)
+              : index_(-1)
+              , path_(path)
               , length_(path ? path->length() : std::numeric_limits<double>::infinity())
+              , approximate_(false)
+              , difference_(-1)
+              , optimized_(false)
             {
             }
 
@@ -109,7 +113,7 @@ namespace ompl
 
             /** \brief When multiple solutions are found, each is given a number starting at 0, so that the order in
              * which the solutions was found can be retrieved. */
-            int index_{-1};
+            int index_;
 
             /** \brief Solution path */
             PathPtr path_;
@@ -118,13 +122,13 @@ namespace ompl
             double length_;
 
             /** \brief True if goal was not achieved, but an approximate solution was found */
-            bool approximate_{false};
+            bool approximate_;
 
             /** \brief The achieved difference between the found solution and the desired goal */
-            double difference_{0.};
+            double difference_;
 
             /** \brief True if the solution was optimized to meet the specified optimization criterion */
-            bool optimized_{false};
+            bool optimized_;
 
             /** \brief Optimization objective that was used to optimize this solution */
             OptimizationObjectivePtr opt_;

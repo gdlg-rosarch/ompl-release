@@ -58,11 +58,11 @@ namespace ompl
             mutable double distance_;
 
             /** \brief Return true if \e state satisfies the goal */
-            bool isSatisfied(const State *state) const override;
+            bool isSatisfied(const State *state) const;
 
             /** \brief Return true if \e state satisfies the goal, and store the distance
                 to the goal in \e distance */
-            bool isSatisfied(const State *state, double *distance) const override;
+            bool isSatisfied(const State *state, double *distance) const;
 
             /** \brief To be implemented in Python; behaves like isSatisfied(state, &distance_) */
             virtual bool isSatisfied_Py(const State *state) const = 0;

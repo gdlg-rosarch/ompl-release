@@ -55,7 +55,7 @@ public:
     virtual void sampleGoal(ompl::base::State *st) const;
     virtual unsigned int maxSampleCount() const
     {
-        return std::numeric_limits<unsigned int>::max();
+        return 100;
     }
 
 

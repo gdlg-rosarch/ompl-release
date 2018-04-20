@@ -42,9 +42,8 @@
 #error FLANN is not available. Please use a different NearestNeighbors data structure.
 #else
 
-#include "ompl/base/StateSpace.h"
 #include "ompl/datastructures/NearestNeighbors.h"
-#include "ompl/util/Exception.h"
+#include "ompl/base/StateSpace.h"
 
 #include <flann/flann.hpp>
 #include <utility>
@@ -321,8 +320,7 @@ namespace ompl
     };
 
     template <>
-    inline void NearestNeighborsFLANN<double, flann::L2<double>>::createIndex(
-        const flann::Matrix<double> &mat)
+    void NearestNeighborsFLANN<double, flann::L2<double>>::createIndex(const flann::Matrix<double> &mat)
     {
         index_ = new flann::Index<flann::L2<double>>(mat, *params_);
         index_->buildIndex();

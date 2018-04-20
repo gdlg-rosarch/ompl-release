@@ -421,76 +421,73 @@ namespace ompl
             ///////////////////////////////////////////////////////////////////
             // Variables -- Make sure every one is configured in setup() and reset in clear():
             /** \brief A helper for cost and heuristic calculations */
-            CostHelperPtr costHelpPtr_{nullptr};
+            CostHelperPtr costHelpPtr_;
 
             /** \brief The samples represented as an edge-implicit graph */
-            ImplicitGraphPtr graphPtr_{nullptr};
+            ImplicitGraphPtr graphPtr_;
 
             /** \brief The queue of vertices to expand and edges to process ordered on "f-value", i.e., estimated
              * solution cost. Remaining vertex queue "size" and edge queue size are accessible via
              * vertexQueueSizeProgressProperty and edgeQueueSizeProgressProperty, respectively. */
-            SearchQueuePtr queuePtr_{nullptr};
+            SearchQueuePtr queuePtr_;
 
             /** \brief The goal vertex of the current best solution */
-            VertexConstPtr curGoalVertex_{nullptr};
+            VertexConstPtr curGoalVertex_;
 
             /** \brief The best cost found to date. This is the maximum total-heuristic cost of samples we'll consider.
              * Accessible via bestCostProgressProperty */
-             // Gets set in setup to the proper calls from OptimizationObjective
-            ompl::base::Cost bestCost_{std::numeric_limits<double>::infinity()};
+            ompl::base::Cost bestCost_;
 
             /** \brief The number of vertices in the best solution found to date. Accessible via
              * bestLengthProgressProperty */
-            unsigned int bestLength_{0u};
+            unsigned int bestLength_;
 
             /** \brief The cost to which the problem has been pruned. We will only prune the graph when a new solution
              * is sufficiently less than this value. */
-             // Gets set in setup to the proper calls from OptimizationObjective
-            ompl::base::Cost prunedCost_{std::numeric_limits<double>::infinity()};
+            ompl::base::Cost prunedCost_;
 
             /** \brief The measure to which the problem has been pruned. We will only prune the graph when the resulting
              * measure of a new solution is sufficiently less than this value. */
-             // Gets set in setup with the proper call to Planner::si_->getSpaceMeasure()
-            double prunedMeasure_{0.0};
+            double prunedMeasure_;
 
             /** \brief If we've found an exact solution yet */
-            bool hasExactSolution_{false};
+            bool hasExactSolution_;
 
             /** \brief A manual stop on the solve loop */
-            bool stopLoop_{false};
+            bool stopLoop_;
             ///////////////////////////////////////////////////////////////////
 
             ///////////////////////////////////////////////////////////////////
             // Informational variables - Make sure initialized in setup and reset in clear
             /** \brief The number of batches processed. Accessible via batchesProgressProperty */
-            unsigned int numBatches_{0u};
+            unsigned int numBatches_;
 
             /** \brief The number of times the graph/samples have been pruned. Accessible via pruningProgressProperty */
-            unsigned int numPrunings_{0u};
+            unsigned int numPrunings_;
 
             /** \brief The number of iterations run. Accessible via iterationProgressProperty */
-            unsigned int numIterations_{0u};
+            unsigned int numIterations_;
 
             /** \brief The number of times a state in the graph was rewired. Accessible via rewiringProgressProperty */
-            unsigned int numRewirings_{0u};
+            unsigned int numRewirings_;
 
             /** \brief The number of edge collision checks. Accessible via edgeCollisionCheckProgressProperty */
-            unsigned int numEdgeCollisionChecks_{0u};
+            unsigned int numEdgeCollisionChecks_;
             ///////////////////////////////////////////////////////////////////
 
             ///////////////////////////////////////////////////////////////////
             // Parameters - Set defaults in construction/setup and DO NOT reset in clear.
             /** \brief The number of samples per batch (param) */
-            unsigned int samplesPerBatch_{100u};
+            unsigned int samplesPerBatch_;
 
             /** \brief Whether to use graph pruning (param) */
-            bool usePruning_{true};
+            bool usePruning_;
 
             /** \brief The fractional decrease in solution cost required to trigger pruning (param) */
-            double pruneFraction_{0.05};
+            double pruneFraction_;
 
             /** \brief Whether to stop the planner as soon as the path changes (param) */
-            bool stopOnSolnChange_{false};
+            bool stopOnSolnChange_;
             ///////////////////////////////////////////////////////////////////
         };  // class: BITstar
 

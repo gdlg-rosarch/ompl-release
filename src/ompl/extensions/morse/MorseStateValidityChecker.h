@@ -53,7 +53,7 @@ namespace ompl
             MorseStateValidityChecker(const SpaceInformationPtr &si);
 
             /** \brief A state is always considered valid if it satisfies the bounds */
-            bool isValid(const State *state) const override;
+            virtual bool isValid(const State *state) const;
 
         protected:
             /** \brief The corresponding MORSE state space */

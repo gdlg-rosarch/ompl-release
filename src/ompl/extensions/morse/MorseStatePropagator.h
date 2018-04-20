@@ -69,11 +69,11 @@ namespace ompl
             }
 
             /** \brief Will always return false, as the simulation can only proceed forward in time */
-            bool canPropagateBackward() const override;
+            virtual bool canPropagateBackward() const;
 
             /** \brief Propagate from a state, under a given control, for some specified amount of time */
-            void propagate(const base::State *state, const Control *control, double duration,
-                           base::State *result) const override;
+            virtual void propagate(const base::State *state, const Control *control, const double duration,
+                                   base::State *result) const;
 
         protected:
             /** \brief The MORSE environment this state propagator operates on */
